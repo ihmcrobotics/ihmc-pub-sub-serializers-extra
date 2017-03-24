@@ -34,4 +34,4 @@ dependencies {
 }
 ```
 
-See [test/us/ihmc/idl/serializers/extra]([test/us/ihmc/idl/serializers/extra]) for examples as test cases.
+See [test/us/ihmc/idl/serializers/extra](test/us/ihmc/idl/serializers/extra) for examples as test cases.
