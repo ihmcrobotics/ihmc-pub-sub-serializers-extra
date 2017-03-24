@@ -15,7 +15,7 @@
  */
 package us.ihmc.idl.serializers.extra;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
@@ -24,23 +24,24 @@ import org.junit.Test;
 import us.ihmc.idl.generated.IDLElement.IDLElementTest;
 import us.ihmc.idl.generated.IDLElement.IDLElementTestPubSubType;
 
-public class YAMLSerializerTest
+public class PropertiesSerializerTest
 {
 
    @Test
    public void test() throws IOException
    {
       IDLElementTestPubSubType dataType = new IDLElementTestPubSubType();
-      YAMLSerializer<IDLElementTest> serializer = new YAMLSerializer<>(dataType);
-      
+      PropertiesSerializer<IDLElementTest> serializer = new PropertiesSerializer<>(dataType);
+
       IDLElementTest testElement = JSONSerializerTest.createPopulatedIDLElementTest();
-      
+
       String data = serializer.serializeToString(testElement);
-    
+      System.out.println(data);
+
       IDLElementTest result = serializer.deserialize(data);
-      
+
       assertEquals(testElement, result);
-      
+
    }
 
 }

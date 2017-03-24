@@ -1,3 +1,18 @@
+/**
+ * Copyright 2017 Florida Institute for Human and Machine Cognition (IHMC)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package us.ihmc.idl.serializers.extra;
 
 import java.io.File;
@@ -31,11 +46,27 @@ public abstract class AbstractSerializer<T extends IDLStruct<?>>
 {
    protected final ObjectMapper mapper;
    protected final TopicDataType<T> topicDataType;
+   private boolean addTypeAsRootNode = true;
+   private CustomDeserializationHandler<T> customDeserializationHandler;
 
    protected AbstractSerializer(TopicDataType<T> topicDataType, ObjectMapper mapper)
    {
       this.topicDataType = topicDataType;
       this.mapper = mapper;
+   }
+   
+   
+
+   /**
+    * Function to enable or disabling adding the topic data type name as the root node of the exported file
+    *  
+    *  Default: [Enabled]
+    *  
+    * @param addTypeAsRootNode
+    */
+   public void setAddTypeAsRootNode(boolean addTypeAsRootNode)
+   {
+      this.addTypeAsRootNode = addTypeAsRootNode;
    }
 
    /**
@@ -122,7 +153,15 @@ public abstract class AbstractSerializer<T extends IDLStruct<?>>
    protected Object serialize(T data) throws IOException
    {
       ObjectNode root = mapper.createObjectNode();
-      ObjectNode node = root.putObject(topicDataType.getName());
+      ObjectNode node;
+      if (addTypeAsRootNode)
+      {
+         node = root.putObject(topicDataType.getName());
+      }
+      else
+      {
+         node = root;
+      }
       data.serialize(new JacksonInterchangeSerializer(node, true));
       return root;
    }
@@ -238,13 +277,25 @@ public abstract class AbstractSerializer<T extends IDLStruct<?>>
    protected T deserialize(JsonNode root) throws IOException
    {
 
-      JsonNode node = root.get(topicDataType.getName());
+      JsonNode node;
+      if(addTypeAsRootNode)
+      {
+         node = root.get(topicDataType.getName());
+      }
+      else
+      {
+         node = root;
+      }
 
       if (node != null && node.isObject())
       {
          JacksonInterchangeSerializer serializer = new JacksonInterchangeSerializer((ObjectNode) node, true);
          T data = topicDataType.createData();
          data.deserialize(serializer);
+         if(customDeserializationHandler != null)
+         {
+            customDeserializationHandler.handle(node, data);
+         }
          return data;
       }
       else
@@ -271,6 +322,20 @@ public abstract class AbstractSerializer<T extends IDLStruct<?>>
       {
          return null;
       }
+   }
+
+
+
+   /**
+    * Add a custom deserialization handler.
+    * 
+    * The main use case is to convert from legacy formats to formats defined in .idl files.
+    * 
+    * @param customDeserializationHandler
+    */
+   public void setCustomDeserializationHandler(CustomDeserializationHandler<T> customDeserializationHandler)
+   {
+      this.customDeserializationHandler = customDeserializationHandler;
    }
 
 }

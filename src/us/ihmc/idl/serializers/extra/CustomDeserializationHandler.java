@@ -15,23 +15,26 @@
  */
 package us.ihmc.idl.serializers.extra;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import us.ihmc.idl.IDLStruct;
-import us.ihmc.pubsub.TopicDataType;
 
 /**
- * JSON Serializer. Serializes IDL files to JSON representation using Jackson
+ * Interface to add custom deserialization routines to the AbstractSerializer
+ * 
+ * The use case is to migrate away from custom formats to formats defined in .idl files
  * 
  * @author Jesper Smith
  *
- * @param <T> IDL element type
+ * @param <T>
  */
-public class JSONSerializer<T extends IDLStruct<?>> extends AbstractSerializer<T>
+public interface  CustomDeserializationHandler<T extends IDLStruct<?>>
 {
-   public JSONSerializer(TopicDataType<T> topicDataType)
-   {
-      super(topicDataType, new ObjectMapper(new JsonFactory()));
-   }
+   /**
+    * Callback function to do custom deserialization
+    * 
+    * @param node The JSON node read from the data
+    * @param data The data after standard deserialization
+    */
+   public void handle(JsonNode node, T data);
 }
