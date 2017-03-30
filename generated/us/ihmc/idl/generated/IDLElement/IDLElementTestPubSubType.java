@@ -46,7 +46,7 @@ public class IDLElementTestPubSubType implements TopicDataType<IDLElementTest>
    @Override
    public int getTypeSize()
    {
-      return IDLElementTest.getMaxCdrSerializedSize() + 4;
+      return CDR.getTypeSize(IDLElementTest.getMaxCdrSerializedSize());
    }
 
    @Override

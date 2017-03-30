@@ -10,7 +10,7 @@ apply plugin: 'application'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-version = '0.2'
+version = '0.2.4'
 buildDir = 'build-java'
 
 project.ext.fullVersion = version

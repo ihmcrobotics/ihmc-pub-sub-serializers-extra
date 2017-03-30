@@ -30,7 +30,7 @@ repositories {
 }
 	
 dependencies {
-	compile group: 'us.ihmc', name: 'IHMCPubSubSerializersExtra', version: '0.2'
+	compile group: 'us.ihmc', name: 'IHMCPubSubSerializersExtra', version: '0.2.4'
 }
 ```
 
