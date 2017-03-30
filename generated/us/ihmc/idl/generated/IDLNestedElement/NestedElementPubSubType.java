@@ -46,7 +46,7 @@ public class NestedElementPubSubType implements TopicDataType<NestedElement>
    @Override
    public int getTypeSize()
    {
-      return NestedElement.getMaxCdrSerializedSize();
+      return NestedElement.getMaxCdrSerializedSize() + 4;
    }
 
    @Override
@@ -59,5 +59,11 @@ public class NestedElementPubSubType implements TopicDataType<NestedElement>
    public NestedElement createData()
    {
       return new NestedElement();
+   }
+   
+   @Override
+   public NestedElementPubSubType newInstance()
+   {
+   	  return new NestedElementPubSubType();
    }
 }
