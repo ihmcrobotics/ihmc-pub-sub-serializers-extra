@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import us.ihmc.idl.IDLSequence;
-import us.ihmc.idl.IDLStruct;
 import us.ihmc.idl.InterchangeSerializer;
+import us.ihmc.pubsub.TopicDataType;
 
 /**
  * Internal class to serialize IDL data to representations supported by Jackson
@@ -149,14 +149,14 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
    /**
     * Struct
     */
-   public void read_type_a(String name, IDLStruct<?> type)
+   public <T> void read_type_a(String name, TopicDataType<T> type, T data)
    {
-      type.deserialize(new JacksonInterchangeSerializer(node.with(name), supportsArrays));
+      type.deserialize(new JacksonInterchangeSerializer(node.with(name), supportsArrays), data);
    }
 
-   public void write_type_a(String name, IDLStruct<?> type)
+   public <T> void write_type_a(String name, TopicDataType<T> type, T data)
    {
-      type.serialize(new JacksonInterchangeSerializer(node.putObject(name), supportsArrays));
+      type.serialize(data, new JacksonInterchangeSerializer(node.putObject(name), supportsArrays));
    }
 
    /**
@@ -271,10 +271,11 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
                }
                else
                {
-                  IDLStruct childStruct = (IDLStruct) ((IDLSequence.Object) seq).add();
+                  TopicDataType<Object> type = ((IDLSequence.Object) seq).getTopicDataType();
+                  Object childStruct = ((IDLSequence.Object) seq).add();
                   if(val.isObject())
                   {
-                     childStruct.deserialize(new JacksonInterchangeSerializer((ObjectNode) val, supportsArrays));                     
+                     type.deserialize(new JacksonInterchangeSerializer((ObjectNode) val, supportsArrays), childStruct);                     
                   }
                }
             }
@@ -341,8 +342,10 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
             }
             else
             {
-               IDLStruct childStruct = (IDLStruct) ((IDLSequence.Object) seq).get(i);
-               childStruct.serialize(new JacksonInterchangeSerializer(child.addObject(), supportsArrays));
+               @SuppressWarnings("unchecked")
+               TopicDataType<Object> type = ((IDLSequence.Object) seq).getTopicDataType();
+               Object childStruct = ((IDLSequence.Object) seq).get(i);
+               type.serialize(childStruct, new JacksonInterchangeSerializer(child.addObject(), supportsArrays));
             }
          }
          else
@@ -543,12 +546,20 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
    {
       checkArraySupport();
       JsonNode child = node.path(name);
-      read_array(arr, child);
+      read_array(arr, child, null);
+      
+   }
+
+   public <T> void read_type_f(String name, TopicDataType<T> dataType, Object[] arr)
+   {
+      checkArraySupport();
+      JsonNode child = node.path(name);
+      read_array(arr, child, dataType);
       
    }
 
    @SuppressWarnings("unchecked")
-   private <T> void read_array(T[] arr, JsonNode child)
+   private <T> void read_array(T[] arr, JsonNode child, @SuppressWarnings("rawtypes") TopicDataType dataType)
    {
       if(child == null)
       {
@@ -578,7 +589,7 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
             else if(arr[i] instanceof double[])
                read_array((double[])arr[i], element);
             else
-               read_array((Object[])arr[i], element);
+               read_array((Object[])arr[i], element, dataType);
          }
       }
       else if (arrayType.isEnum())
@@ -610,14 +621,14 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
             }
          }
       }
-      else if (IDLStruct.class.isAssignableFrom(arrayType))
+      else if (dataType != null)
       {
          for (int i = 0; i < arr.length; i++)
          {
             JsonNode element = child.get(i);
             if (element != null && element.isObject())
             {
-               ((IDLStruct<?>) arr[i]).deserialize(new JacksonInterchangeSerializer((ObjectNode) element, supportsArrays));
+               dataType.deserialize(new JacksonInterchangeSerializer((ObjectNode) element, supportsArrays), arr[i]);
             }
          }
       }
@@ -754,7 +765,8 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
       }
    }
    
-   private <T> void write_array(ArrayNode child, T[] arr)
+   @SuppressWarnings("unchecked")
+   private <T> void write_array(ArrayNode child, T[] arr, @SuppressWarnings("rawtypes") TopicDataType dataType)
    {
       Class<?> arrayType = arr.getClass().getComponentType();
       if(arrayType.isArray())
@@ -779,7 +791,7 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
             else if(arr[i] instanceof double[])
                write_array((double[])arr[i], element);
             else
-               write_array(element, (Object[])arr[i]);
+               write_array(element, (Object[])arr[i], dataType);
          }
       }
       else if (arrayType.isEnum())
@@ -796,12 +808,12 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
             child.add(((StringBuilder) arr[i]).toString());
          }
       }
-      else if (IDLStruct.class.isAssignableFrom(arrayType))
+      else if (dataType != null)
       {
          for (int i = 0; i < arr.length; i++)
          {
             ObjectNode element = child.addObject();
-            ((IDLStruct<?>) arr[i]).serialize(new JacksonInterchangeSerializer(element, supportsArrays));
+            dataType.serialize(arr[i], new JacksonInterchangeSerializer(element, supportsArrays));
          }
       }
       else
@@ -814,9 +826,16 @@ class JacksonInterchangeSerializer implements InterchangeSerializer
    {
       checkArraySupport();
       ArrayNode child = node.putArray(name);
-      write_array(child, arr);
+      write_array(child, arr, null);
       
 
+   }
+
+   public <T> void write_type_f(String name, TopicDataType<T> dataType, Object[] arr)
+   {
+      checkArraySupport();
+      ArrayNode child = node.putArray(name);
+      write_array(child, arr, dataType);
    }
 
    /**

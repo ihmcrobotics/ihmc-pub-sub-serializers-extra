@@ -17,8 +17,6 @@ package us.ihmc.idl.serializers.extra;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import us.ihmc.idl.IDLStruct;
-
 /**
  * Interface to add custom deserialization routines to the AbstractSerializer
  * 
@@ -28,7 +26,7 @@ import us.ihmc.idl.IDLStruct;
  *
  * @param <T>
  */
-public interface  CustomDeserializationHandler<T extends IDLStruct<?>>
+public interface  CustomDeserializationHandler<T>
 {
    /**
     * Callback function to do custom deserialization

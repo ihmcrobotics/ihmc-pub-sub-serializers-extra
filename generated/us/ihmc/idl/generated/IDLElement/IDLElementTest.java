@@ -2,7 +2,6 @@ package us.ihmc.idl.generated.IDLElement;
 import us.ihmc.idl.IDLSequence;
 import us.ihmc.idl.CDR;
 import us.ihmc.idl.InterchangeSerializer;
-import us.ihmc.idl.IDLStruct;
 import java.util.Arrays;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Arrays;
 * Do not update this file directly, edit IDLElementTest.idl instead.
 *
 */
-public class IDLElementTest implements IDLStruct<IDLElementTest>
+public class IDLElementTest
 {
     public IDLElementTest()
     {
@@ -50,7 +49,7 @@ public class IDLElementTest implements IDLStruct<IDLElementTest>
         
         
     }
-    @Override
+
     public void set(IDLElementTest other)
     {
         	charTest_ = other.charTest_;
@@ -66,26 +65,28 @@ public class IDLElementTest implements IDLStruct<IDLElementTest>
         	doubleTest_ = other.doubleTest_;
         	booleanTest_ = other.booleanTest_;
         	colorTest_ = other.colorTest_;
-        	nestedElementTest_.set(other.nestedElementTest_);stringTest_.setLength(0);
+           	us.ihmc.idl.generated.IDLNestedElement.NestedElementPubSubType.staticCopy(nestedElementTest_, other.nestedElementTest_);stringTest_.setLength(0);
         	stringTest_.append(other.stringTest_);
         	for(int g = 0; g < longArray_.length; ++g)
         	{
         	    	longArray_[g] = other.longArray_[g];	
 
         	}
+        	
         	for(int i = 0; i < nestedArray_.length; ++i)
         	{
         	    for(int j = 0; j < nestedArray_[i].length; ++j)
         	    {
-        	        	other.nestedArray_[i][j].set(nestedArray_[i][j]);
-        	    }
+        	        	us.ihmc.idl.generated.IDLNestedElement.NestedElementPubSubType.staticCopy(nestedArray_[i][j], other.nestedArray_[i][j]);        	}
         	}
+        	
         	for(int l = 0; l < stringArray_.length; ++l)
         	{
         	    	stringArray_[l].setLength(0);
         	    	stringArray_[l].append(other.stringArray_[l]);
-        	            	}
-        	charSeqTest_.set(other.charSeqTest_);wcharSeqTest_.set(other.wcharSeqTest_);octetSeqTest_.set(other.octetSeqTest_);shortSeqTest_.set(other.shortSeqTest_);ushortSeqTest_.set(other.ushortSeqTest_);longSeqTest_.set(other.longSeqTest_);ulongSeqTest_.set(other.ulongSeqTest_);longlongSeqtest_.set(other.longlongSeqtest_);ulonglongSeqTest_.set(other.ulonglongSeqTest_);floatSeqTest_.set(other.floatSeqTest_);doubleSeqTest_.set(other.doubleSeqTest_);booleanSeqTest_.set(other.booleanSeqTest_);nestedSeqTest_.set(other.nestedSeqTest_);stringSeqTest_.set(other.stringSeqTest_);
+        	}
+        	
+            charSeqTest_.set(other.charSeqTest_);	wcharSeqTest_.set(other.wcharSeqTest_);	octetSeqTest_.set(other.octetSeqTest_);	shortSeqTest_.set(other.shortSeqTest_);	ushortSeqTest_.set(other.ushortSeqTest_);	longSeqTest_.set(other.longSeqTest_);	ulongSeqTest_.set(other.ulongSeqTest_);	longlongSeqtest_.set(other.longlongSeqtest_);	ulonglongSeqTest_.set(other.ulonglongSeqTest_);	floatSeqTest_.set(other.floatSeqTest_);	doubleSeqTest_.set(other.doubleSeqTest_);	booleanSeqTest_.set(other.booleanSeqTest_);	nestedSeqTest_.set(other.nestedSeqTest_);	stringSeqTest_.set(other.stringSeqTest_);	
     }
 
     public void setCharTest(char charTest)
@@ -376,565 +377,7 @@ public class IDLElementTest implements IDLStruct<IDLElementTest>
         
 
 
-	public static int getMaxCdrSerializedSize()
-	{
-		return getMaxCdrSerializedSize(0);
-	}
 
-	public static int getMaxCdrSerializedSize(int current_alignment)
-	{
-	    int initial_alignment = current_alignment;
-	            
-	    current_alignment += 1 + CDR.alignment(current_alignment, 1);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += 1 + CDR.alignment(current_alignment, 1);
-
-	    current_alignment += 2 + CDR.alignment(current_alignment, 2);
-
-	    current_alignment += 2 + CDR.alignment(current_alignment, 2);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += 8 + CDR.alignment(current_alignment, 8);
-
-	    current_alignment += 8 + CDR.alignment(current_alignment, 8);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += 8 + CDR.alignment(current_alignment, 8);
-
-	    current_alignment += 1 + CDR.alignment(current_alignment, 1);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += us.ihmc.idl.generated.IDLNestedElement.NestedElement.getMaxCdrSerializedSize(current_alignment);
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4) + 255 + 1;
-
-	    current_alignment += ((10) * 4) + CDR.alignment(current_alignment, 4);
-
-	    for(int a = 0; a < (5 * 3); ++a)
-	    {
-	        current_alignment += us.ihmc.idl.generated.IDLNestedElement.NestedElement.getMaxCdrSerializedSize(current_alignment);}
-	    for(int a = 0; a < (4); ++a)
-	    {
-	        current_alignment += 4 + CDR.alignment(current_alignment, 4) + 255 + 1;
-	    }
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 1) + CDR.alignment(current_alignment, 1);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 4) + CDR.alignment(current_alignment, 4);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 1) + CDR.alignment(current_alignment, 1);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 2) + CDR.alignment(current_alignment, 2);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 2) + CDR.alignment(current_alignment, 2);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 4) + CDR.alignment(current_alignment, 4);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 4) + CDR.alignment(current_alignment, 4);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 8) + CDR.alignment(current_alignment, 8);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 8) + CDR.alignment(current_alignment, 8);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 4) + CDR.alignment(current_alignment, 4);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 8) + CDR.alignment(current_alignment, 8);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (25 * 1) + CDR.alignment(current_alignment, 1);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    for(int a = 0; a < 25; ++a)
-	    {
-	        current_alignment += us.ihmc.idl.generated.IDLNestedElement.NestedElement.getMaxCdrSerializedSize(current_alignment);}
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    for(int a = 0; a < 25; ++a)
-	    {
-	        current_alignment += 4 + CDR.alignment(current_alignment, 4) + 255 + 1;
-	    }
-	
-	    return current_alignment - initial_alignment;
-	}
-
-
-	public final static int getCdrSerializedSize(IDLElementTest data)
-	{
-		return getCdrSerializedSize(data, 0);
-	}
-
-	public final static int getCdrSerializedSize(IDLElementTest data, int current_alignment)
-	{
-	    int initial_alignment = current_alignment;
-	            
-	    current_alignment += 1 + CDR.alignment(current_alignment, 1);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += 1 + CDR.alignment(current_alignment, 1);
-
-	    current_alignment += 2 + CDR.alignment(current_alignment, 2);
-
-	    current_alignment += 2 + CDR.alignment(current_alignment, 2);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += 8 + CDR.alignment(current_alignment, 8);
-
-	    current_alignment += 8 + CDR.alignment(current_alignment, 8);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += 8 + CDR.alignment(current_alignment, 8);
-
-	    current_alignment += 1 + CDR.alignment(current_alignment, 1);
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	    current_alignment += us.ihmc.idl.generated.IDLNestedElement.NestedElement.getCdrSerializedSize(data.getNestedElementTest(), current_alignment);
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4) + data.getStringTest().length() + 1;
-
-	    current_alignment += ((10) * 4) + CDR.alignment(current_alignment, 4);
-	    for(int a = 0; a < data.getNestedArray().length; ++a)
-	    {
-	        for(int b = 0; b < data.getNestedArray()[a].length; ++b)
-	        {
-	                current_alignment += us.ihmc.idl.generated.IDLNestedElement.NestedElement.getCdrSerializedSize(data.getNestedArray()[a][b], current_alignment);
-	        }
-	    }
-	    for(int a = 0; a < data.getStringArray().length; ++a)
-	    {
-	            current_alignment += 4 + CDR.alignment(current_alignment, 4) + data.getStringArray()[a].length() + 1;
-
-	    }
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getCharSeqTest().size() * 1) + CDR.alignment(current_alignment, 1);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getWcharSeqTest().size() * 4) + CDR.alignment(current_alignment, 4);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getOctetSeqTest().size() * 1) + CDR.alignment(current_alignment, 1);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getShortSeqTest().size() * 2) + CDR.alignment(current_alignment, 2);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getUshortSeqTest().size() * 2) + CDR.alignment(current_alignment, 2);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getLongSeqTest().size() * 4) + CDR.alignment(current_alignment, 4);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getUlongSeqTest().size() * 4) + CDR.alignment(current_alignment, 4);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getLonglongSeqtest().size() * 8) + CDR.alignment(current_alignment, 8);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getUlonglongSeqTest().size() * 8) + CDR.alignment(current_alignment, 8);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getFloatSeqTest().size() * 4) + CDR.alignment(current_alignment, 4);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getDoubleSeqTest().size() * 8) + CDR.alignment(current_alignment, 8);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    current_alignment += (data.getBooleanSeqTest().size() * 1) + CDR.alignment(current_alignment, 1);
-
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    for(int a = 0; a < data.getNestedSeqTest().size(); ++a)
-	    {
-	        current_alignment += us.ihmc.idl.generated.IDLNestedElement.NestedElement.getCdrSerializedSize(data.getNestedSeqTest().get(a), current_alignment);}
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-	    for(int a = 0; a < data.getStringSeqTest().size(); ++a)
-	    {
-	        current_alignment += 4 + CDR.alignment(current_alignment, 4) + data.getStringSeqTest().get(a).length() + 1;
-	    }
-	
-	    return current_alignment - initial_alignment;
-	}
-	
-	@Override
-	public final void serialize(CDR cdr)
-	{
-
-
-	    cdr.write_type_8(charTest_);
-
-	    cdr.write_type_14(wcharTest_);
-
-	    cdr.write_type_9(octetTest_);
-
-	    cdr.write_type_1(shortTest_);
-
-	    cdr.write_type_3(ushortTest_);
-
-	    cdr.write_type_2(longTest_);
-
-	    cdr.write_type_4(ulongTest_);
-
-	    cdr.write_type_11(longlongTest_);
-
-	    cdr.write_type_12(ulonglongTest_);
-
-	    cdr.write_type_5(floatTest_);
-
-	    cdr.write_type_6(doubleTest_);
-
-	    cdr.write_type_7(booleanTest_);
-
-	    cdr.write_type_c(colorTest_.ordinal());
-
-
-	    cdr.write_type_a(nestedElementTest_);
-
-	    if(stringTest_.length() <= 255)
-	    cdr.write_type_d(stringTest_);else
-	        throw new RuntimeException("stringTest field exceeds the maximum length");
-
-	    for(int a = 0; a < longArray_.length; ++a)
-	    {
-	        	cdr.write_type_2(longArray_[a]);	
-	    }
-
-	    for(int a = 0; a < nestedArray_.length; ++a)
-	    {
-	        for(int b = 0; b < nestedArray_[a].length; ++b)
-	        {
-	            	cdr.write_type_a(nestedArray_[a][b]);	
-	        }
-	    }
-
-	    for(int a = 0; a < stringArray_.length; ++a)
-	    {
-	        	cdr.write_type_d(stringArray_[a]);	
-	    }
-
-	    if(charSeqTest_.size() <= 25)
-	    cdr.write_type_e(charSeqTest_);else
-	        throw new RuntimeException("charSeqTest field exceeds the maximum length");
-
-	    if(wcharSeqTest_.size() <= 25)
-	    cdr.write_type_e(wcharSeqTest_);else
-	        throw new RuntimeException("wcharSeqTest field exceeds the maximum length");
-
-	    if(octetSeqTest_.size() <= 25)
-	    cdr.write_type_e(octetSeqTest_);else
-	        throw new RuntimeException("octetSeqTest field exceeds the maximum length");
-
-	    if(shortSeqTest_.size() <= 25)
-	    cdr.write_type_e(shortSeqTest_);else
-	        throw new RuntimeException("shortSeqTest field exceeds the maximum length");
-
-	    if(ushortSeqTest_.size() <= 25)
-	    cdr.write_type_e(ushortSeqTest_);else
-	        throw new RuntimeException("ushortSeqTest field exceeds the maximum length");
-
-	    if(longSeqTest_.size() <= 25)
-	    cdr.write_type_e(longSeqTest_);else
-	        throw new RuntimeException("longSeqTest field exceeds the maximum length");
-
-	    if(ulongSeqTest_.size() <= 25)
-	    cdr.write_type_e(ulongSeqTest_);else
-	        throw new RuntimeException("ulongSeqTest field exceeds the maximum length");
-
-	    if(longlongSeqtest_.size() <= 25)
-	    cdr.write_type_e(longlongSeqtest_);else
-	        throw new RuntimeException("longlongSeqtest field exceeds the maximum length");
-
-	    if(ulonglongSeqTest_.size() <= 25)
-	    cdr.write_type_e(ulonglongSeqTest_);else
-	        throw new RuntimeException("ulonglongSeqTest field exceeds the maximum length");
-
-	    if(floatSeqTest_.size() <= 25)
-	    cdr.write_type_e(floatSeqTest_);else
-	        throw new RuntimeException("floatSeqTest field exceeds the maximum length");
-
-	    if(doubleSeqTest_.size() <= 25)
-	    cdr.write_type_e(doubleSeqTest_);else
-	        throw new RuntimeException("doubleSeqTest field exceeds the maximum length");
-
-	    if(booleanSeqTest_.size() <= 25)
-	    cdr.write_type_e(booleanSeqTest_);else
-	        throw new RuntimeException("booleanSeqTest field exceeds the maximum length");
-
-	    if(nestedSeqTest_.size() <= 25)
-	    cdr.write_type_e(nestedSeqTest_);else
-	        throw new RuntimeException("nestedSeqTest field exceeds the maximum length");
-
-	    if(stringSeqTest_.size() <= 25)
-	    cdr.write_type_e(stringSeqTest_);else
-	        throw new RuntimeException("stringSeqTest field exceeds the maximum length");
-	}
-	
-	@Override
-	public final void deserialize(CDR cdr)
-	{
-
-	    	charTest_ = cdr.read_type_8();	
-
-	    	wcharTest_ = cdr.read_type_14();	
-
-	    	octetTest_ = cdr.read_type_9();	
-
-	    	shortTest_ = cdr.read_type_1();	
-
-	    	ushortTest_ = cdr.read_type_3();	
-
-	    	longTest_ = cdr.read_type_2();	
-
-	    	ulongTest_ = cdr.read_type_4();	
-
-	    	longlongTest_ = cdr.read_type_11();	
-
-	    	ulonglongTest_ = cdr.read_type_12();	
-
-	    	floatTest_ = cdr.read_type_5();	
-
-	    	doubleTest_ = cdr.read_type_6();	
-
-	    	booleanTest_ = cdr.read_type_7();	
-
-	    	colorTest_ = us.ihmc.idl.generated.IDLElement.Color.values[cdr.read_type_c()];
-	    	
-
-	    	cdr.read_type_a(nestedElementTest_);	
-
-	    	cdr.read_type_d(stringTest_);	
-
-	    	for(int a = 0; a < longArray_.length; ++a)
-	    	{
-	    	    	longArray_[a] = cdr.read_type_2();	
-	    	}
-	    	
-
-	    	for(int a = 0; a < nestedArray_.length; ++a)
-	    	{
-	    	    for(int b = 0; b < nestedArray_[a].length; ++b)
-	    	    {
-	    	        	cdr.read_type_a(nestedArray_[a][b]);	
-	    	    }
-	    	}
-	    	
-
-	    	for(int a = 0; a < stringArray_.length; ++a)
-	    	{
-	    	    	cdr.read_type_d(stringArray_[a]);	
-	    	}
-	    	
-
-	    	cdr.read_type_e(charSeqTest_);	
-
-	    	cdr.read_type_e(wcharSeqTest_);	
-
-	    	cdr.read_type_e(octetSeqTest_);	
-
-	    	cdr.read_type_e(shortSeqTest_);	
-
-	    	cdr.read_type_e(ushortSeqTest_);	
-
-	    	cdr.read_type_e(longSeqTest_);	
-
-	    	cdr.read_type_e(ulongSeqTest_);	
-
-	    	cdr.read_type_e(longlongSeqtest_);	
-
-	    	cdr.read_type_e(ulonglongSeqTest_);	
-
-	    	cdr.read_type_e(floatSeqTest_);	
-
-	    	cdr.read_type_e(doubleSeqTest_);	
-
-	    	cdr.read_type_e(booleanSeqTest_);	
-
-	    	cdr.read_type_e(nestedSeqTest_);	
-
-	    	cdr.read_type_e(stringSeqTest_);	
-	}
-	
-	@Override
-	public final void serialize(InterchangeSerializer ser)
-	{
-			    ser.write_type_8("charTest", charTest_);
-			    
-			    ser.write_type_14("wcharTest", wcharTest_);
-			    
-			    ser.write_type_9("octetTest", octetTest_);
-			    
-			    ser.write_type_1("shortTest", shortTest_);
-			    
-			    ser.write_type_3("ushortTest", ushortTest_);
-			    
-			    ser.write_type_2("longTest", longTest_);
-			    
-			    ser.write_type_4("ulongTest", ulongTest_);
-			    
-			    ser.write_type_11("longlongTest", longlongTest_);
-			    
-			    ser.write_type_12("ulonglongTest", ulonglongTest_);
-			    
-			    ser.write_type_5("floatTest", floatTest_);
-			    
-			    ser.write_type_6("doubleTest", doubleTest_);
-			    
-			    ser.write_type_7("booleanTest", booleanTest_);
-			    
-			    ser.write_type_c("colorTest", colorTest_);
-			    
-			    ser.write_type_a("nestedElementTest", nestedElementTest_);
-			    
-			    ser.write_type_d("stringTest", stringTest_);
-			    
-			    ser.write_type_f("longArray", longArray_);
-			    
-			    ser.write_type_f("nestedArray", nestedArray_);
-			    
-			    ser.write_type_f("stringArray", stringArray_);
-			    
-			    ser.write_type_e("charSeqTest", charSeqTest_);
-			    
-			    ser.write_type_e("wcharSeqTest", wcharSeqTest_);
-			    
-			    ser.write_type_e("octetSeqTest", octetSeqTest_);
-			    
-			    ser.write_type_e("shortSeqTest", shortSeqTest_);
-			    
-			    ser.write_type_e("ushortSeqTest", ushortSeqTest_);
-			    
-			    ser.write_type_e("longSeqTest", longSeqTest_);
-			    
-			    ser.write_type_e("ulongSeqTest", ulongSeqTest_);
-			    
-			    ser.write_type_e("longlongSeqtest", longlongSeqtest_);
-			    
-			    ser.write_type_e("ulonglongSeqTest", ulonglongSeqTest_);
-			    
-			    ser.write_type_e("floatSeqTest", floatSeqTest_);
-			    
-			    ser.write_type_e("doubleSeqTest", doubleSeqTest_);
-			    
-			    ser.write_type_e("booleanSeqTest", booleanSeqTest_);
-			    
-			    ser.write_type_e("nestedSeqTest", nestedSeqTest_);
-			    
-			    ser.write_type_e("stringSeqTest", stringSeqTest_);
-			    
-	}
-	
-	@Override
-	public final void deserialize(InterchangeSerializer ser)
-	{
-	    			charTest_ = ser.read_type_8("charTest");	
-	    	    
-	    			wcharTest_ = ser.read_type_14("wcharTest");	
-	    	    
-	    			octetTest_ = ser.read_type_9("octetTest");	
-	    	    
-	    			shortTest_ = ser.read_type_1("shortTest");	
-	    	    
-	    			ushortTest_ = ser.read_type_3("ushortTest");	
-	    	    
-	    			longTest_ = ser.read_type_2("longTest");	
-	    	    
-	    			ulongTest_ = ser.read_type_4("ulongTest");	
-	    	    
-	    			longlongTest_ = ser.read_type_11("longlongTest");	
-	    	    
-	    			ulonglongTest_ = ser.read_type_12("ulonglongTest");	
-	    	    
-	    			floatTest_ = ser.read_type_5("floatTest");	
-	    	    
-	    			doubleTest_ = ser.read_type_6("doubleTest");	
-	    	    
-	    			booleanTest_ = ser.read_type_7("booleanTest");	
-	    	    
-	    			colorTest_ = (us.ihmc.idl.generated.IDLElement.Color)ser.read_type_c("colorTest", us.ihmc.idl.generated.IDLElement.Color.class);
-	    	
-	    	    
-	    			ser.read_type_a("nestedElementTest", nestedElementTest_);	
-	    	    
-	    			ser.read_type_d("stringTest", stringTest_);	
-	    	    
-	    			ser.read_type_f("longArray", longArray_);	
-	    	    
-	    			ser.read_type_f("nestedArray", nestedArray_);	
-	    	    
-	    			ser.read_type_f("stringArray", stringArray_);	
-	    	    
-	    			ser.read_type_e("charSeqTest", charSeqTest_);	
-	    	    
-	    			ser.read_type_e("wcharSeqTest", wcharSeqTest_);	
-	    	    
-	    			ser.read_type_e("octetSeqTest", octetSeqTest_);	
-	    	    
-	    			ser.read_type_e("shortSeqTest", shortSeqTest_);	
-	    	    
-	    			ser.read_type_e("ushortSeqTest", ushortSeqTest_);	
-	    	    
-	    			ser.read_type_e("longSeqTest", longSeqTest_);	
-	    	    
-	    			ser.read_type_e("ulongSeqTest", ulongSeqTest_);	
-	    	    
-	    			ser.read_type_e("longlongSeqtest", longlongSeqtest_);	
-	    	    
-	    			ser.read_type_e("ulonglongSeqTest", ulonglongSeqTest_);	
-	    	    
-	    			ser.read_type_e("floatSeqTest", floatSeqTest_);	
-	    	    
-	    			ser.read_type_e("doubleSeqTest", doubleSeqTest_);	
-	    	    
-	    			ser.read_type_e("booleanSeqTest", booleanSeqTest_);	
-	    	    
-	    			ser.read_type_e("nestedSeqTest", nestedSeqTest_);	
-	    	    
-	    			ser.read_type_e("stringSeqTest", stringSeqTest_);	
-	    	    
-	}
 
     @Override
     public boolean equals(Object other)
@@ -988,21 +431,21 @@ public class IDLElementTest implements IDLStruct<IDLElementTest>
                 
         returnedValue &= us.ihmc.idl.IDLTools.equals(this.stringTest_, otherMyClass.stringTest_);
                 
-                	for(int c = 0; c < longArray_.length; ++c)
+                	for(int n = 0; n < longArray_.length; ++n)
                 	{
-                	    returnedValue &= this.longArray_[c] == otherMyClass.longArray_[c];
+                	    returnedValue &= this.longArray_[n] == otherMyClass.longArray_[n];
 
                 	}        
-                	for(int e = 0; e < nestedArray_.length; ++e)
+                	for(int p = 0; p < nestedArray_.length; ++p)
                 	{
-                	    for(int f = 0; f < nestedArray_[e].length; ++f)
+                	    for(int q = 0; q < nestedArray_[p].length; ++q)
                 	    {
-                	        returnedValue &= nestedArray_[e][f].equals(otherMyClass.nestedArray_[e][f]);
+                	        returnedValue &= nestedArray_[p][q].equals(otherMyClass.nestedArray_[p][q]);
                 	    }
                 	}        
-                	for(int h = 0; h < stringArray_.length; ++h)
+                	for(int s = 0; s < stringArray_.length; ++s)
                 	{
-                	    returnedValue &= us.ihmc.idl.IDLTools.equals(this.stringArray_[h], otherMyClass.stringArray_[h]);}        
+                	    returnedValue &= us.ihmc.idl.IDLTools.equals(this.stringArray_[s], otherMyClass.stringArray_[s]);}        
         returnedValue &= this.charSeqTest_.equals(otherMyClass.charSeqTest_);
                 
         returnedValue &= this.wcharSeqTest_.equals(otherMyClass.wcharSeqTest_);

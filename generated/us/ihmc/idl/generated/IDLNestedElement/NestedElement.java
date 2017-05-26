@@ -2,7 +2,6 @@ package us.ihmc.idl.generated.IDLNestedElement;
 import us.ihmc.idl.IDLSequence;
 import us.ihmc.idl.CDR;
 import us.ihmc.idl.InterchangeSerializer;
-import us.ihmc.idl.IDLStruct;
 import java.util.Arrays;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Arrays;
 * Do not update this file directly, edit NestedElement.idl instead.
 *
 */
-public class NestedElement implements IDLStruct<NestedElement>
+public class NestedElement
 {
     public NestedElement()
     {
@@ -21,7 +20,7 @@ public class NestedElement implements IDLStruct<NestedElement>
         
         
     }
-    @Override
+
     public void set(NestedElement other)
     {
         	stringTest_.setLength(0);
@@ -60,79 +59,7 @@ public class NestedElement implements IDLStruct<NestedElement>
         
 
 
-	public static int getMaxCdrSerializedSize()
-	{
-		return getMaxCdrSerializedSize(0);
-	}
 
-	public static int getMaxCdrSerializedSize(int current_alignment)
-	{
-	    int initial_alignment = current_alignment;
-	            
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4) + 255 + 1;
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	
-	    return current_alignment - initial_alignment;
-	}
-
-
-	public final static int getCdrSerializedSize(NestedElement data)
-	{
-		return getCdrSerializedSize(data, 0);
-	}
-
-	public final static int getCdrSerializedSize(NestedElement data, int current_alignment)
-	{
-	    int initial_alignment = current_alignment;
-	            
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4) + data.getStringTest().length() + 1;
-
-	    current_alignment += 4 + CDR.alignment(current_alignment, 4);
-
-	
-	    return current_alignment - initial_alignment;
-	}
-	
-	@Override
-	public final void serialize(CDR cdr)
-	{
-
-
-	    if(stringTest_.length() <= 255)
-	    cdr.write_type_d(stringTest_);else
-	        throw new RuntimeException("stringTest field exceeds the maximum length");
-
-	    cdr.write_type_2(longTest_);
-	}
-	
-	@Override
-	public final void deserialize(CDR cdr)
-	{
-
-	    	cdr.read_type_d(stringTest_);	
-
-	    	longTest_ = cdr.read_type_2();	
-	}
-	
-	@Override
-	public final void serialize(InterchangeSerializer ser)
-	{
-			    ser.write_type_d("stringTest", stringTest_);
-			    
-			    ser.write_type_2("longTest", longTest_);
-			    
-	}
-	
-	@Override
-	public final void deserialize(InterchangeSerializer ser)
-	{
-	    			ser.read_type_d("stringTest", stringTest_);	
-	    	    
-	    			longTest_ = ser.read_type_2("longTest");	
-	    	    
-	}
 
     @Override
     public boolean equals(Object other)

@@ -36,6 +36,7 @@ public class YAMLSerializerTest
       IDLElementTest testElement = JSONSerializerTest.createPopulatedIDLElementTest();
       
       String data = serializer.serializeToString(testElement);
+      System.out.println(data);
     
       IDLElementTest result = serializer.deserialize(data);
       

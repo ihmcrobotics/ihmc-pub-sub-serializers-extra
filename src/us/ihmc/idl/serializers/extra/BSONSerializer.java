@@ -18,7 +18,6 @@ package us.ihmc.idl.serializers.extra;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.undercouch.bson4jackson.BsonFactory;
-import us.ihmc.idl.IDLStruct;
 import us.ihmc.pubsub.TopicDataType;
 
 /**
@@ -28,7 +27,7 @@ import us.ihmc.pubsub.TopicDataType;
  *
  * @param <T> IDL element type
  */
-public class BSONSerializer<T extends IDLStruct<?>> extends AbstractSerializer<T>
+public class BSONSerializer<T> extends AbstractSerializer<T>
 {
    public BSONSerializer(TopicDataType<T> topicDataType)
    {

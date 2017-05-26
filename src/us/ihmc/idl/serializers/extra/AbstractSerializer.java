@@ -28,7 +28,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import us.ihmc.idl.IDLStruct;
 import us.ihmc.pubsub.TopicDataType;
 
 /**
@@ -42,7 +41,7 @@ import us.ihmc.pubsub.TopicDataType;
  *
  * @param <T>
  */
-public abstract class AbstractSerializer<T extends IDLStruct<?>>
+public abstract class AbstractSerializer<T>
 {
    protected final ObjectMapper mapper;
    protected final TopicDataType<T> topicDataType;
@@ -162,7 +161,8 @@ public abstract class AbstractSerializer<T extends IDLStruct<?>>
       {
          node = root;
       }
-      data.serialize(new JacksonInterchangeSerializer(node, true));
+      
+      topicDataType.serialize(data, new JacksonInterchangeSerializer(node, true));
       return root;
    }
 
@@ -291,7 +291,7 @@ public abstract class AbstractSerializer<T extends IDLStruct<?>>
       {
          JacksonInterchangeSerializer serializer = new JacksonInterchangeSerializer((ObjectNode) node, true);
          T data = topicDataType.createData();
-         data.deserialize(serializer);
+         topicDataType.deserialize(serializer, data);
          if(customDeserializationHandler != null)
          {
             customDeserializationHandler.handle(node, data);

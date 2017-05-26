@@ -17,7 +17,6 @@ package us.ihmc.idl.serializers.extra;
 
 import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 
-import us.ihmc.idl.IDLStruct;
 import us.ihmc.pubsub.TopicDataType;
 
 /**
@@ -29,7 +28,7 @@ import us.ihmc.pubsub.TopicDataType;
  *
  * @param <T> IDL element type
  */
-public class PropertiesSerializer<T extends IDLStruct<?>> extends AbstractSerializer<T>
+public class PropertiesSerializer<T> extends AbstractSerializer<T>
 {
    public PropertiesSerializer(TopicDataType<T> topicDataType)
    {

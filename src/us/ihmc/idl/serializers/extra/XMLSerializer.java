@@ -26,7 +26,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import us.ihmc.idl.IDLStruct;
 import us.ihmc.pubsub.TopicDataType;
 
 /**
@@ -38,7 +37,7 @@ import us.ihmc.pubsub.TopicDataType;
  *
  * @param <T> IDL element type
  */
-public class XMLSerializer<T extends IDLStruct<?>> extends AbstractSerializer<T>
+public class XMLSerializer<T> extends AbstractSerializer<T>
 {
    @JacksonXmlRootElement(localName = "TopicDataType")
    private static class Wrapper
@@ -71,7 +70,7 @@ public class XMLSerializer<T extends IDLStruct<?>> extends AbstractSerializer<T>
 
       wrapper.name = topicDataType.getName();
       wrapper.payload = mapper.createObjectNode();
-      data.serialize(new JacksonInterchangeSerializer(wrapper.payload, false));
+      topicDataType.serialize(data, new JacksonInterchangeSerializer(wrapper.payload, false));
       return wrapper;
    }
 
@@ -85,7 +84,7 @@ public class XMLSerializer<T extends IDLStruct<?>> extends AbstractSerializer<T>
       {
          JacksonInterchangeSerializer serializer = new JacksonInterchangeSerializer((ObjectNode) element, false);
          T data = topicDataType.createData();
-         data.deserialize(serializer);
+         topicDataType.deserialize(serializer, data);
          return data;
 
       }

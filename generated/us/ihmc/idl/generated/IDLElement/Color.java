@@ -2,7 +2,6 @@ package us.ihmc.idl.generated.IDLElement;
 import us.ihmc.idl.IDLSequence;
 import us.ihmc.idl.CDR;
 import us.ihmc.idl.InterchangeSerializer;
-import us.ihmc.idl.IDLStruct;
 import java.util.Arrays;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Arrays;
 * Do not update this file directly, edit IDLElementTest.idl instead.
 *
 */
-public enum Color implements IDLStruct<Color>
+public enum Color
 {
         	red,
         
